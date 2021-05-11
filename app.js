@@ -3,7 +3,7 @@ require("dotenv/config");
 
 const url =
   "http://api.weatherstack.com/current?access_key=" +
-  process.env.API_KEY +
+  process.env.API_KEY_WEATHER_STACK +
   "&query=37.8267,-122.4233&units=m";
 
 request({ url: url, json: true }, (error, response) => {
@@ -16,4 +16,14 @@ request({ url: url, json: true }, (error, response) => {
       response.body.current.feelslike +
       " degrees out."
   );
+});
+
+const geocodeURL =
+  "https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=" +
+  process.env.API_KEY_MAPBOX;
+
+request({ url: geocodeURL, json: true }, (error, response) => {
+  const latitude = response.body.features[0].center[1];
+  const longitude = response.body.features[0].center[0];
+  console.log(latitude, longitude);
 });
