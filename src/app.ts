@@ -1,3 +1,5 @@
+import { Request, Response } from "express";
+
 require("dotenv/config");
 const path = require("path");
 const express = require("express");
@@ -18,21 +20,21 @@ hbs.registerPartials(partialsPath);
 
 app.use(express.static(publicDirectoryPath));
 
-app.get("", (req, res) => {
+app.get("", (req: Request, res: Response) => {
   res.render("index", {
     title: "Weather",
     name: "Jujix",
   });
 });
 
-app.get("/about", (req, res) => {
+app.get("/about", (req: Request, res: Response) => {
   res.render("about", {
     title: "About Me",
     name: "Jujix",
   });
 });
 
-app.get("/help", (req, res) => {
+app.get("/help", (req: Request, res: Response) => {
   res.render("help", {
     helpText: "This is some helpfull text",
     title: "Help",
@@ -40,7 +42,7 @@ app.get("/help", (req, res) => {
   });
 });
 
-app.get("/weather", (req, res) => {
+app.get("/weather", (req: Request, res: Response) => {
   if (!req.query.address) {
     return res.send({
       error: "You must provide a address!",
@@ -49,12 +51,12 @@ app.get("/weather", (req, res) => {
 
   geocode(
     req.query.address,
-    (error, { latitude, longitude, location } = {}) => {
+    (error: Error, { latitude, longitude, location }: {latitude: number, longitude: number, location: string}) => {
       if (error) {
         return res.send({ error });
       }
 
-      forecast(latitude, longitude, (error, forecastData) => {
+      forecast(latitude, longitude, (error: Error, forecastData: JSON) => {
         if (error) {
           return res.send({ error });
         }
@@ -69,7 +71,7 @@ app.get("/weather", (req, res) => {
   );
 });
 
-app.get("/help/*", (req, res) => {
+app.get("/help/*", (req: Request, res: Response) => {
   res.render("404", {
     title: "404",
     name: "Jujix",
@@ -77,7 +79,7 @@ app.get("/help/*", (req, res) => {
   });
 });
 
-app.get("*", (req, res) => {
+app.get("*", (req: Request, res: Response) => {
   res.render("404", {
     title: "404",
     name: "Jujix",

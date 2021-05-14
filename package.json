@@ -4,8 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node src/app.js",
-    "dev": "nodemon src/app.js -e, js,hbs",
+    "start": "ts-node src/app.ts",
+    "dev": "nodemon src/app.ts -e, ts,hbs",
     "tcs:w": "tsc -w"
   },
   "keywords": [],
@@ -15,6 +15,7 @@
     "dotenv": "^9.0.2",
     "express": "^4.17.1",
     "hbs": "^4.1.2",
+    "jsdom": "^16.5.3",
     "postman-request": "^2.88.1-postman.30"
   },
   "devDependencies": {

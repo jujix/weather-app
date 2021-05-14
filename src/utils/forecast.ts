@@ -1,6 +1,7 @@
+/* @ts-ignore */
 const request = require("postman-request");
 
-const forecast = (latitude, longitude, callback) => {
+const forecast = (latitude: number, longitude: number, callback: (message: string, undefined?: undefined) => {}) => {
   const url =
     "http://api.weatherstack.com/current?access_key=" +
     process.env.API_KEY_WEATHER_STACK +
@@ -10,13 +11,16 @@ const forecast = (latitude, longitude, callback) => {
     longitude +
     "&units=m";
 
-  request({ url, json: true }, (error, { body }) => {
+
+/* @ts-ignore */
+  request({ url, json: true }, (error: Error, { body }) => {
     if (error) {
       callback("Unable to connect to weather service!");
     } else if (body.error) {
       callback("Unable to find location", undefined);
     } else {
       callback(
+        /* @ts-ignore */
         undefined,
         body.current.weather_descriptions[0] +
           ". It is currently " +
