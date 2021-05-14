@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node src/app.js",
-    "dev": "nodemon src/app.js -e, js,hbs"
+    "dev": "nodemon src/app.js -e, js,hbs",
+    "tcs:w": "tsc -w"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +18,7 @@
     "postman-request": "^2.88.1-postman.30"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "typescript": "^4.2.4"
   }
 }
